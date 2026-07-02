@@ -1,0 +1,21 @@
+# Java compiled files
+*.class
+*.jar
+*.war
+*.ear
+
+# IntelliJ / IDE files
+.idea/
+*.iml
+
+# Build output
+out/
+build/
+target/
+
+# macOS files
+.DS_Store
+
+# Logs and temporary files
+*.log
+*.tmp

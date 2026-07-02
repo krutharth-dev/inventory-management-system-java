@@ -1,0 +1,10 @@
+1,Milk,25
+3,beans,27
+4,tea powder,28
+5,vegetables,29
+6,milk powder,30
+7,jaggery,31
+8,pumpkin seeds,32
+9,green tea pack,33
+10,Oats,34
+11,Cooking Oil,15
