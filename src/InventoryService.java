@@ -1,4 +1,10 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class InventoryService {
@@ -76,6 +82,79 @@ public class InventoryService {
         }
 
         return lowStockProducts;
+    }
+
+    public List<Product> sortProducts(String sortOption) {
+        List<Product> products = storage.readProducts();
+
+        switch (sortOption.toLowerCase()) {
+            case "id":
+                products.sort(Comparator.comparingInt(Product::getId));
+                break;
+            case "name":
+                products.sort(Comparator.comparing(Product::getName, String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "quantity":
+                products.sort(Comparator.comparingInt(Product::getQuantity));
+                break;
+            case "price":
+                products.sort(Comparator.comparingDouble(Product::getPrice));
+                break;
+            case "category":
+                products.sort(Comparator.comparing(Product::getCategory, String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "value":
+                products.sort(Comparator.comparingDouble(Product::getTotalValue).reversed());
+                break;
+            default:
+                products.sort(Comparator.comparingInt(Product::getId));
+        }
+
+        return products;
+    }
+
+    public int getTotalProductTypes() {
+        return storage.readProducts().size();
+    }
+
+    public int getTotalStockUnits() {
+        int totalUnits = 0;
+
+        for (Product product : storage.readProducts()) {
+            totalUnits += product.getQuantity();
+        }
+
+        return totalUnits;
+    }
+
+    public double getTotalInventoryValue() {
+        double totalValue = 0.0;
+
+        for (Product product : storage.readProducts()) {
+            totalValue += product.getTotalValue();
+        }
+
+        return totalValue;
+    }
+
+    public boolean exportToCsv(String fileName) {
+        List<Product> products = storage.readProducts();
+        Path outputPath = Paths.get(fileName);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(outputPath)) {
+            writer.write("ID,Name,Quantity,Price,Category,Total Value");
+            writer.newLine();
+
+            for (Product product : products) {
+                writer.write(product.toCsvLine());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error exporting CSV file: " + e.getMessage());
+            return false;
+        }
+
+        return true;
     }
 
     private Product findProductById(List<Product> products, int id) {
