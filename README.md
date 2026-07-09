@@ -2,7 +2,7 @@
 
 A Java-based command-line inventory management system that allows users to manage product records using object-oriented programming, file handling, data validation, and persistent text-file storage.
 
-This project is designed as a beginner-to-intermediate Java portfolio project that demonstrates CRUD operations, search, validation, low-stock detection, and safe inventory file updates.
+This project is designed as a beginner-to-intermediate Java portfolio project that demonstrates CRUD operations, search, validation, low-stock detection, layered code structure, and safe inventory file updates.
 
 ---
 
@@ -29,6 +29,7 @@ The application stores product data in a local `inventory.txt` file, allowing in
 - Prevent invalid negative quantities
 - Store inventory data using file handling
 - Save data safely using a temporary file before replacing the main inventory file
+- Uses separate classes for UI, product model, business logic, and file storage
 
 ---
 
@@ -41,6 +42,7 @@ The application stores product data in a local `inventory.txt` file, allowing in
 - Command-line interface
 - Input validation
 - Persistent storage using text files
+- Layered application structure
 
 ---
 
@@ -49,11 +51,26 @@ The application stores product data in a local `inventory.txt` file, allowing in
 ```text
 .
 ├── src/
-│   └── InventoryManagement.java
+│   ├── InventoryManagement.java
+│   ├── InventoryService.java
+│   ├── FileStorage.java
+│   └── Product.java
 ├── inventory.txt
 ├── README.md
+├── UPGRADE_PLAN.md
 └── .gitignore
 ```
+
+---
+
+## Class Responsibilities
+
+| Class | Responsibility |
+|---|---|
+| `InventoryManagement` | Handles menu display, user input, and command-line interface flow |
+| `InventoryService` | Handles inventory business logic such as add, update, delete, search, and low-stock filtering |
+| `FileStorage` | Handles reading products from `inventory.txt` and saving products safely |
+| `Product` | Represents one inventory item with ID, name, and quantity |
 
 ---
 
@@ -62,7 +79,7 @@ The application stores product data in a local `inventory.txt` file, allowing in
 From the project root directory, run:
 
 ```bash
-javac -d out src/InventoryManagement.java
+javac -d out src/*.java
 ```
 
 ---
@@ -155,19 +172,20 @@ The program can search using either the exact product ID or a name keyword.
 
 | Concept | How It Is Used |
 |---|---|
-| Object-Oriented Programming | Product class stores product details |
+| Object-Oriented Programming | Product, service, storage, and UI responsibilities are separated |
 | File Handling | Inventory records are read from and written to `inventory.txt` |
 | CRUD Operations | Add, update, remove, and display products |
 | Input Validation | Invalid IDs, quantities, and empty names are handled |
 | Search | Products can be searched by ID or name |
 | Data Persistence | Inventory data remains saved after program exit |
 | Safe File Update | Temporary file is used before replacing the inventory file |
+| Layered Design | UI, business logic, storage, and model code are separated |
 
 ---
 
 ## Why This Project Is Useful
 
-This project demonstrates how a real-world inventory problem can be solved using core Java concepts. It shows the ability to build a complete terminal-based application with structured data, validation, persistent storage, and user-friendly menu navigation.
+This project demonstrates how a real-world inventory problem can be solved using core Java concepts. It shows the ability to build a complete terminal-based application with structured data, validation, persistent storage, modular class design, and user-friendly menu navigation.
 
 It is useful for demonstrating:
 
@@ -177,6 +195,7 @@ It is useful for demonstrating:
 - File-based persistence
 - Basic software application development
 - User input validation
+- Clean code organisation
 
 ---
 
@@ -193,11 +212,11 @@ It is useful for demonstrating:
 ## Future Enhancements
 
 - Add SQLite or MySQL database support.
+- Add product price, category, and supplier fields.
 - Add Java Swing or JavaFX graphical user interface.
 - Add Spring Boot backend version.
 - Add React frontend for a full-stack version.
 - Add login system with admin and staff roles.
-- Add product categories and supplier details.
 - Add sales and purchase history.
 - Add CSV/PDF export.
 - Add automated unit tests.
@@ -207,4 +226,4 @@ It is useful for demonstrating:
 
 ## Resume Summary
 
-Built a Java-based inventory management system implementing CRUD operations, product search, low-stock detection, input validation, object-oriented design, and persistent file-based storage through a command-line interface.
+Built a Java-based inventory management system implementing CRUD operations, product search, low-stock detection, input validation, object-oriented class separation, and persistent file-based storage through a command-line interface.
