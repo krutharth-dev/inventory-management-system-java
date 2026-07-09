@@ -11,8 +11,13 @@ This file lists practical improvements that can make the Inventory Management Sy
 - Added `InventoryService.java` for business logic.
 - Added `FileStorage.java` for file reading and writing.
 - Kept `InventoryManagement.java` as the command-line interface entry point.
-- Updated compile instructions to compile all Java files.
-- Updated README with class responsibilities.
+- Added product price and category fields.
+- Added total value calculation per product.
+- Added inventory summary analytics.
+- Added sorting by ID, name, quantity, price, category, and total value.
+- Added CSV export.
+- Updated sample inventory data to include price and category.
+- Updated README with new features and examples.
 
 ---
 
@@ -21,8 +26,8 @@ This file lists practical improvements that can make the Inventory Management Sy
 - Add terminal screenshots.
 - Add sample input/output examples.
 - Add a demo video or GIF.
-- Add a short explanation of the file storage format.
 - Add a features table to show completed and planned features.
+- Add screenshots of CSV export output.
 
 ---
 
@@ -53,12 +58,10 @@ Current structure:
 
 ## Priority 3: Functional Enhancements
 
-- Add product price field.
-- Add product category field.
 - Add supplier name field.
-- Add total inventory value calculation.
-- Add sort by quantity, name, or product ID.
-- Add export inventory to CSV.
+- Add reorder-level field.
+- Add category-wise inventory value summary.
+- Add export low-stock report to CSV.
 - Add import inventory from CSV.
 - Add stock-in and stock-out transaction history.
 - Add date/time tracking for updates.
@@ -85,6 +88,7 @@ products
 - price
 - category
 - supplier
+- reorder_level
 - created_at
 - updated_at
 
@@ -120,7 +124,8 @@ Suggested full-stack modules:
 - Add/update product form
 - Search and filter table
 - Low-stock alert page
-- Export report button
+- CSV/PDF export report button
+- Category-wise analytics
 - Admin login
 
 ---
@@ -130,8 +135,9 @@ Suggested full-stack modules:
 - Add unit tests for product validation.
 - Add tests for add, update, delete, and search operations.
 - Add tests for duplicate product IDs.
-- Add tests for invalid quantities.
+- Add tests for invalid quantities and prices.
 - Add tests for file read/write behaviour.
+- Add tests for CSV export.
 
 ---
 
@@ -139,8 +145,8 @@ Suggested full-stack modules:
 
 The best immediate upgrade is:
 
-1. Add product price and category.
-2. Add CSV export.
+1. Add unit tests.
+2. Add supplier and reorder-level fields.
 3. Add SQLite database support.
-4. Add unit tests.
+4. Add CSV import.
 5. Add screenshots and sample outputs to the README.
