@@ -1,10 +1,10 @@
-1,Milk,25
-3,beans,27
-4,tea powder,28
-5,vegetables,29
-6,milk powder,30
-7,jaggery,31
-8,pumpkin seeds,32
-9,green tea pack,33
-10,Oats,34
-11,Cooking Oil,15
+1,Milk,25,2.50,Dairy
+3,Beans,27,1.80,Groceries
+4,Tea Powder,28,4.20,Beverages
+5,Vegetables,29,3.00,Fresh Produce
+6,Milk Powder,30,6.50,Dairy
+7,Jaggery,31,2.20,Groceries
+8,Pumpkin Seeds,32,5.75,Health Foods
+9,Green Tea Pack,33,4.80,Beverages
+10,Oats,34,3.90,Breakfast
+11,Cooking Oil,15,7.25,Groceries
