@@ -4,6 +4,18 @@ This file lists practical improvements that can make the Inventory Management Sy
 
 ---
 
+## Completed Recent Upgrades
+
+- Refactored the original single-file program into multiple Java classes.
+- Added `Product.java` as the model class.
+- Added `InventoryService.java` for business logic.
+- Added `FileStorage.java` for file reading and writing.
+- Kept `InventoryManagement.java` as the command-line interface entry point.
+- Updated compile instructions to compile all Java files.
+- Updated README with class responsibilities.
+
+---
+
 ## Priority 1: Documentation and Demo Improvements
 
 - Add terminal screenshots.
@@ -16,24 +28,21 @@ This file lists practical improvements that can make the Inventory Management Sy
 
 ## Priority 2: Code Quality Improvements
 
-- Separate the current single Java file into multiple classes.
-- Create a dedicated `Product` class file.
-- Create an `InventoryService` class for business logic.
-- Create a `FileStorage` class for file reading and writing.
-- Keep `InventoryManagement` as the main application entry point.
+- Add automated unit tests.
+- Add JavaDoc-style comments for important classes and methods.
+- Add stricter validation for unusual product names.
+- Add cleaner error handling for file access problems.
+- Add a constants/config class for file names and formatting values.
 
-Suggested improved structure:
+Current structure:
 
 ```text
 .
 ├── src/
 │   ├── InventoryManagement.java
-│   ├── model/
-│   │   └── Product.java
-│   ├── service/
-│   │   └── InventoryService.java
-│   └── storage/
-│       └── FileStorage.java
+│   ├── InventoryService.java
+│   ├── FileStorage.java
+│   └── Product.java
 ├── tests/
 ├── inventory.txt
 ├── README.md
@@ -130,8 +139,8 @@ Suggested full-stack modules:
 
 The best immediate upgrade is:
 
-1. Split the code into multiple classes.
-2. Add product price and category.
-3. Add CSV export.
-4. Add SQLite database support.
+1. Add product price and category.
+2. Add CSV export.
+3. Add SQLite database support.
+4. Add unit tests.
 5. Add screenshots and sample outputs to the README.
