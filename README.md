@@ -6,6 +6,12 @@ This project is designed as a beginner-to-intermediate Java portfolio project th
 
 ---
 
+## Sample Output
+
+![Inventory Management System sample output](screenshots/sample-output.svg)
+
+---
+
 ## Project Overview
 
 The Inventory Management System helps users maintain a simple product inventory from the terminal. Users can add new products, update stock quantities, remove products, search existing items, display all inventory records, identify products below a custom low-stock threshold, sort inventory, view inventory analytics, track suppliers, track reorder levels, and export records to CSV.
@@ -66,6 +72,8 @@ The application stores product data in a local `inventory.txt` file, allowing in
 │   ├── InventoryService.java
 │   ├── FileStorage.java
 │   └── Product.java
+├── screenshots/
+│   └── sample-output.svg
 ├── inventory.txt
 ├── README.md
 ├── UPGRADE_PLAN.md
