@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <rect width="1200" height="760" rx="20" fill="#0d1117"/>
+  <rect x="0" y="0" width="1200" height="54" rx="20" fill="#161b22"/>
+  <circle cx="32" cy="27" r="9" fill="#ff5f56"/>
+  <circle cx="58" cy="27" r="9" fill="#ffbd2e"/>
+  <circle cx="84" cy="27" r="9" fill="#27c93f"/>
+  <text x="600" y="35" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9" text-anchor="middle">inventory-management-system-java</text>
+
+  <text x="36" y="90" font-family="Menlo, Consolas, monospace" font-size="19" fill="#c9d1d9">$ java -cp out InventoryManagement</text>
+  <text x="36" y="135" font-family="Menlo, Consolas, monospace" font-size="20" fill="#7ee787" font-weight="700">INVENTORY MANAGEMENT SYSTEM</text>
+
+  <text x="36" y="180" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">1. Add Product</text>
+  <text x="36" y="208" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">2. Update Product Quantity</text>
+  <text x="36" y="236" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">3. Remove Product</text>
+  <text x="36" y="264" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">4. Display Inventory</text>
+  <text x="36" y="292" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">7. Inventory Summary</text>
+  <text x="36" y="320" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">10. Reorder Report</text>
+  <text x="36" y="348" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">12. Export Reorder Report to CSV</text>
+
+  <text x="36" y="400" font-family="Menlo, Consolas, monospace" font-size="20" fill="#7ee787" font-weight="700">CURRENT INVENTORY</text>
+  <text x="36" y="435" font-family="Menlo, Consolas, monospace" font-size="17" fill="#c9d1d9">ID   Name          Qty   Price     Category       Supplier            Reorder   Value       Status</text>
+  <text x="36" y="462" font-family="Menlo, Consolas, monospace" font-size="17" fill="#8b949e">------------------------------------------------------------------------------------------------------</text>
+  <text x="36" y="490" font-family="Menlo, Consolas, monospace" font-size="17" fill="#c9d1d9">101  Laptop        15    65000.00  Electronics    Tech Distributors   5         975000.00   OK</text>
+  <text x="36" y="518" font-family="Menlo, Consolas, monospace" font-size="17" fill="#c9d1d9">102  Keyboard      40    1200.00   Accessories    InputTech           10        48000.00    OK</text>
+  <text x="36" y="546" font-family="Menlo, Consolas, monospace" font-size="17" fill="#c9d1d9">103  Mouse         6     800.00    Accessories    InputTech           8         4800.00     REORDER</text>
+  <text x="36" y="574" font-family="Menlo, Consolas, monospace" font-size="17" fill="#c9d1d9">104  Oats          32    3.90      Breakfast      FreshMart           12        124.80      OK</text>
+
+  <text x="36" y="630" font-family="Menlo, Consolas, monospace" font-size="20" fill="#7ee787" font-weight="700">INVENTORY SUMMARY</text>
+  <text x="36" y="665" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">Total product types: 4    Total stock units: 93    Total inventory value: 1027924.80</text>
+  <text x="36" y="700" font-family="Menlo, Consolas, monospace" font-size="18" fill="#c9d1d9">Category Summary: Electronics 975000.00 | Accessories 52800.00 | Breakfast 124.80</text>
+</svg>
