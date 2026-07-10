@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /*
@@ -20,7 +21,7 @@ public class InventoryManagement {
 
         do {
             displayMenu();
-            choice = readInt("Enter your choice: ", 1, 10);
+            choice = readInt("Enter your choice: ", 1, 13);
 
             switch (choice) {
                 case 1:
@@ -45,18 +46,27 @@ public class InventoryManagement {
                     showInventorySummary();
                     break;
                 case 8:
-                    sortInventory();
+                    showCategorySummary();
                     break;
                 case 9:
-                    exportInventoryToCsv();
+                    showReorderReport();
                     break;
                 case 10:
+                    sortInventory();
+                    break;
+                case 11:
+                    exportInventoryToCsv();
+                    break;
+                case 12:
+                    exportReorderReportToCsv();
+                    break;
+                case 13:
                     System.out.println("Exiting program. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-        } while (choice != 10);
+        } while (choice != 13);
     }
 
     private static void displayMenu() {
@@ -68,9 +78,12 @@ public class InventoryManagement {
         System.out.println("5. Low Stock Alert");
         System.out.println("6. Search Product");
         System.out.println("7. Inventory Summary");
-        System.out.println("8. Sort Inventory");
-        System.out.println("9. Export Inventory to CSV");
-        System.out.println("10. Exit");
+        System.out.println("8. Category Value Summary");
+        System.out.println("9. Reorder Report");
+        System.out.println("10. Sort Inventory");
+        System.out.println("11. Export Inventory to CSV");
+        System.out.println("12. Export Reorder Report to CSV");
+        System.out.println("13. Exit");
     }
 
     private static void addProduct() {
@@ -86,8 +99,10 @@ public class InventoryManagement {
         int quantity = readInt("Quantity: ", 0, Integer.MAX_VALUE);
         double price = readDouble("Unit Price: ", 0.0, Double.MAX_VALUE);
         String category = readSafeText("Category: ");
+        String supplier = readSafeText("Supplier: ");
+        int reorderLevel = readInt("Reorder Level: ", 0, Integer.MAX_VALUE);
 
-        Product product = new Product(id, name, quantity, price, category);
+        Product product = new Product(id, name, quantity, price, category, supplier, reorderLevel);
 
         if (inventoryService.addProduct(product)) {
             System.out.println("Product added successfully.");
@@ -225,6 +240,38 @@ public class InventoryManagement {
         System.out.println("Total product types: " + inventoryService.getTotalProductTypes());
         System.out.println("Total stock units: " + inventoryService.getTotalStockUnits());
         System.out.printf("Total inventory value: %.2f%n", inventoryService.getTotalInventoryValue());
+        System.out.println("Products needing reorder: " + inventoryService.getProductsNeedingReorder().size());
+    }
+
+    private static void showCategorySummary() {
+        Map<String, Double> categorySummary = inventoryService.getCategoryValueSummary();
+
+        System.out.println("\n--- Category Value Summary ---");
+
+        if (categorySummary.isEmpty()) {
+            System.out.println("Inventory is empty.");
+            return;
+        }
+
+        System.out.printf("%-25s %-15s%n", "Category", "Total Value");
+        System.out.println("------------------------------------------");
+
+        for (Map.Entry<String, Double> entry : categorySummary.entrySet()) {
+            System.out.printf("%-25s %-15.2f%n", entry.getKey(), entry.getValue());
+        }
+    }
+
+    private static void showReorderReport() {
+        List<Product> reorderProducts = inventoryService.getProductsNeedingReorder();
+
+        System.out.println("\n--- Reorder Report ---");
+
+        if (reorderProducts.isEmpty()) {
+            System.out.println("No products currently need reorder.");
+            return;
+        }
+
+        printProductTable(reorderProducts);
     }
 
     private static void sortInventory() {
@@ -241,9 +288,11 @@ public class InventoryManagement {
         System.out.println("3. Sort by Quantity");
         System.out.println("4. Sort by Price");
         System.out.println("5. Sort by Category");
-        System.out.println("6. Sort by Total Value, highest first");
+        System.out.println("6. Sort by Supplier");
+        System.out.println("7. Sort by Reorder Level");
+        System.out.println("8. Sort by Total Value, highest first");
 
-        int option = readInt("Enter your choice: ", 1, 6);
+        int option = readInt("Enter your choice: ", 1, 8);
         String sortOption;
 
         switch (option) {
@@ -263,6 +312,12 @@ public class InventoryManagement {
                 sortOption = "category";
                 break;
             case 6:
+                sortOption = "supplier";
+                break;
+            case 7:
+                sortOption = "reorder";
+                break;
+            case 8:
                 sortOption = "value";
                 break;
             default:
@@ -290,6 +345,27 @@ public class InventoryManagement {
             System.out.println("Inventory exported successfully to " + fileName);
         } else {
             System.out.println("Unable to export inventory.");
+        }
+    }
+
+    private static void exportReorderReportToCsv() {
+        List<Product> products = inventoryService.getProductsNeedingReorder();
+
+        if (products.isEmpty()) {
+            System.out.println("No products currently need reorder. Nothing to export.");
+            return;
+        }
+
+        String fileName = readNonEmptyString("Enter CSV file name, e.g. reorder_report.csv: ");
+
+        if (!fileName.toLowerCase().endsWith(".csv")) {
+            fileName += ".csv";
+        }
+
+        if (inventoryService.exportReorderReportToCsv(fileName)) {
+            System.out.println("Reorder report exported successfully to " + fileName);
+        } else {
+            System.out.println("Unable to export reorder report.");
         }
     }
 
@@ -369,26 +445,32 @@ public class InventoryManagement {
 
     private static void printTableHeader() {
         System.out.printf(
-                "%-8s %-22s %-10s %-10s %-18s %-12s%n",
+                "%-6s %-18s %-8s %-9s %-15s %-18s %-8s %-11s %-8s%n",
                 "ID",
                 "Name",
-                "Quantity",
+                "Qty",
                 "Price",
                 "Category",
-                "Value"
+                "Supplier",
+                "Reorder",
+                "Value",
+                "Status"
         );
-        System.out.println("--------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
     }
 
     private static void printProductRow(Product product) {
         System.out.printf(
-                "%-8d %-22s %-10d %-10.2f %-18s %-12.2f%n",
+                "%-6d %-18s %-8d %-9.2f %-15s %-18s %-8d %-11.2f %-8s%n",
                 product.getId(),
                 product.getName(),
                 product.getQuantity(),
                 product.getPrice(),
                 product.getCategory(),
-                product.getTotalValue()
+                product.getSupplier(),
+                product.getReorderLevel(),
+                product.getTotalValue(),
+                product.getStockStatus()
         );
     }
 }
