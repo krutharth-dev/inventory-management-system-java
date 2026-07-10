@@ -1,10 +1,10 @@
-1,Milk,25,2.50,Dairy
-3,Beans,27,1.80,Groceries
-4,Tea Powder,28,4.20,Beverages
-5,Vegetables,29,3.00,Fresh Produce
-6,Milk Powder,30,6.50,Dairy
-7,Jaggery,31,2.20,Groceries
-8,Pumpkin Seeds,32,5.75,Health Foods
-9,Green Tea Pack,33,4.80,Beverages
-10,Oats,34,3.90,Breakfast
-11,Cooking Oil,15,7.25,Groceries
+1,Milk,25,2.50,Dairy,Local Dairy Supplier,10
+3,Beans,27,1.80,Groceries,Everyday Foods Distributor,12
+4,Tea Powder,28,4.20,Beverages,Tea House Wholesale,8
+5,Vegetables,29,3.00,Fresh Produce,Green Farm Supplier,15
+6,Milk Powder,30,6.50,Dairy,Local Dairy Supplier,10
+7,Jaggery,31,2.20,Groceries,Everyday Foods Distributor,12
+8,Pumpkin Seeds,32,5.75,Health Foods,Nutri Foods Supplier,8
+9,Green Tea Pack,33,4.80,Beverages,Tea House Wholesale,8
+10,Oats,34,3.90,Breakfast,Healthy Grains Co,10
+11,Cooking Oil,15,7.25,Groceries,Kitchen Essentials Supplier,20
