@@ -5,7 +5,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class InventoryService {
     private final FileStorage storage;
@@ -84,6 +86,19 @@ public class InventoryService {
         return lowStockProducts;
     }
 
+    public List<Product> getProductsNeedingReorder() {
+        List<Product> products = storage.readProducts();
+        List<Product> reorderProducts = new ArrayList<>();
+
+        for (Product product : products) {
+            if (product.needsReorder()) {
+                reorderProducts.add(product);
+            }
+        }
+
+        return reorderProducts;
+    }
+
     public List<Product> sortProducts(String sortOption) {
         List<Product> products = storage.readProducts();
 
@@ -102,6 +117,12 @@ public class InventoryService {
                 break;
             case "category":
                 products.sort(Comparator.comparing(Product::getCategory, String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "supplier":
+                products.sort(Comparator.comparing(Product::getSupplier, String.CASE_INSENSITIVE_ORDER));
+                break;
+            case "reorder":
+                products.sort(Comparator.comparingInt(Product::getReorderLevel));
                 break;
             case "value":
                 products.sort(Comparator.comparingDouble(Product::getTotalValue).reversed());
@@ -137,12 +158,25 @@ public class InventoryService {
         return totalValue;
     }
 
+    public Map<String, Double> getCategoryValueSummary() {
+        Map<String, Double> categoryValues = new LinkedHashMap<>();
+
+        for (Product product : storage.readProducts()) {
+            categoryValues.put(
+                    product.getCategory(),
+                    categoryValues.getOrDefault(product.getCategory(), 0.0) + product.getTotalValue()
+            );
+        }
+
+        return categoryValues;
+    }
+
     public boolean exportToCsv(String fileName) {
         List<Product> products = storage.readProducts();
         Path outputPath = Paths.get(fileName);
 
         try (BufferedWriter writer = Files.newBufferedWriter(outputPath)) {
-            writer.write("ID,Name,Quantity,Price,Category,Total Value");
+            writer.write("ID,Name,Quantity,Price,Category,Supplier,Reorder Level,Total Value,Stock Status");
             writer.newLine();
 
             for (Product product : products) {
@@ -151,6 +185,26 @@ public class InventoryService {
             }
         } catch (IOException e) {
             System.out.println("Error exporting CSV file: " + e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean exportReorderReportToCsv(String fileName) {
+        List<Product> products = getProductsNeedingReorder();
+        Path outputPath = Paths.get(fileName);
+
+        try (BufferedWriter writer = Files.newBufferedWriter(outputPath)) {
+            writer.write("ID,Name,Quantity,Price,Category,Supplier,Reorder Level,Total Value,Stock Status");
+            writer.newLine();
+
+            for (Product product : products) {
+                writer.write(product.toCsvLine());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error exporting reorder CSV file: " + e.getMessage());
             return false;
         }
 
