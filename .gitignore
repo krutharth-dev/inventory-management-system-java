@@ -4,18 +4,28 @@
 *.war
 *.ear
 
-# IntelliJ / IDE files
-.idea/
-*.iml
-
 # Build output
 out/
 build/
 target/
+bin/
 
-# macOS files
-.DS_Store
+# IntelliJ / IDE files
+.idea/
+*.iml
+.vscode/
+
+# Generated reports and exports
+inventory_export.csv
+reorder_report.csv
+*.csv
 
 # Logs and temporary files
 *.log
 *.tmp
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
