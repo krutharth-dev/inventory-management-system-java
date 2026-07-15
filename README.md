@@ -1,5 +1,10 @@
 # Inventory Management System in Java
 
+![Java Build](https://github.com/krutharth-dev/inventory-management-system-java/actions/workflows/java-build.yml/badge.svg)
+![Language: Java](https://img.shields.io/badge/Language-Java-orange.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Platform: CLI](https://img.shields.io/badge/Platform-CLI-lightgrey.svg)
+
 A Java-based command-line inventory management system that allows users to manage product records using object-oriented programming, file handling, data validation, persistent text-file storage, inventory analytics, sorting, reorder tracking, supplier tracking, and CSV export.
 
 This project is designed as a beginner-to-intermediate Java portfolio project that demonstrates CRUD operations, search, validation, low-stock detection, layered code structure, safe inventory file updates, report generation, and basic inventory valuation.
@@ -44,6 +49,8 @@ The application stores product data in a local `inventory.txt` file, allowing in
 - Store inventory data using file handling
 - Save data safely using a temporary file before replacing the main inventory file
 - Uses separate classes for UI, product model, business logic, and file storage
+- Includes GitHub Actions build verification
+- Licensed under the MIT License
 
 ---
 
@@ -60,6 +67,7 @@ The application stores product data in a local `inventory.txt` file, allowing in
 - Persistent storage using text files
 - CSV export
 - Layered application structure
+- GitHub Actions CI
 
 ---
 
@@ -67,6 +75,9 @@ The application stores product data in a local `inventory.txt` file, allowing in
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── java-build.yml
 ├── src/
 │   ├── InventoryManagement.java
 │   ├── InventoryService.java
@@ -76,6 +87,7 @@ The application stores product data in a local `inventory.txt` file, allowing in
 │   └── sample-output.svg
 ├── inventory.txt
 ├── README.md
+├── LICENSE
 ├── UPGRADE_PLAN.md
 └── .gitignore
 ```
@@ -219,7 +231,24 @@ Inventory exported successfully to inventory_export.csv
 | Supplier Tracking | Supplier names are stored and displayed for each product |
 | CSV Export | Product records and reorder reports can be exported into CSV files |
 | Safe File Update | Temporary file is used before replacing the inventory file |
+| CI/build verification | GitHub Actions workflow |
 | Layered Design | UI, business logic, storage, and model code are separated |
+
+---
+
+## Continuous Integration
+
+This repository includes a GitHub Actions workflow that automatically compiles the Java source files on every push and pull request.
+
+```text
+.github/workflows/java-build.yml
+```
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ---
 
@@ -245,4 +274,4 @@ This project demonstrates how a real-world inventory problem can be solved using
 
 ## Resume Summary
 
-Built a Java-based inventory management system implementing CRUD operations, product search, low-stock detection, reorder-level tracking, supplier tracking, input validation, object-oriented class separation, price/category tracking, inventory valuation, sorting, category-wise analytics, CSV export, reorder report export, and persistent file-based storage through a command-line interface.
+Built a Java-based inventory management system implementing CRUD operations, product search, low-stock detection, reorder-level tracking, supplier tracking, input validation, object-oriented class separation, price/category tracking, inventory valuation, sorting, category-wise analytics, CSV export, reorder report export, GitHub Actions build checks, and persistent file-based storage through a command-line interface.
